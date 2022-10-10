@@ -1,5 +1,35 @@
 syntax="proto3";
 
 service Booking{
-  rpc
+  rpc get_json(EmptyBooking) returns (stream BookingsUser){}
+  rpc get_booking_for_user(UserId) returns (BookingsUser){}
+  rpc add_booking_byuser(AddBooking) returns (BookingsUser){}
 }
+
+
+message EmptyBooking{
+}
+
+message AddBooking{
+  string userid = 1;
+  string date = 2;
+  string movieid = 3;
+}
+
+message UserId{
+  string userid = 1;
+}
+
+message DateItem{
+    string date = 1;
+    repeated string movies = 2;
+  }
+
+message BookingsUser{
+  repeated DateItem dates = 1;
+  string userid = 2;
+}
+
+
+
+
